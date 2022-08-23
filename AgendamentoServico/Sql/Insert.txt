@@ -1,0 +1,21 @@
+INSERT INTO Profissional(Nome, Cnpj, Email, Especialidade) VALUES ('1prof', '00000000000100', '1prof@gmail.com', 'Programação')
+INSERT INTO Profissional(Nome, Cnpj, Email, Especialidade) VALUES ('2prof', '00000000000100', '2prof@gmail.com', 'Design')
+INSERT INTO Profissional(Nome, Cnpj, Email, Especialidade) VALUES ('3prof', '00000000000100', '3prof@gmail.com', 'Tradução')
+
+INSERT INTO Cliente(Nome, Cpf, DataNascimento, Email, Endereco) VALUES ('1cliente', '00000000000', '07-08-1999','1cliente@gmail.com', 'Rua 1000, 123')
+INSERT INTO Cliente(Nome, Cpf, DataNascimento, Email, Endereco) VALUES ('2cliente', '00000000000', '07-08-1999','2cliente@gmail.com', 'Rua 1000, 123')
+INSERT INTO Cliente(Nome, Cpf, DataNascimento, Email, Endereco) VALUES ('3cliente', '00000000000', '07-08-1999','3cliente@gmail.com', 'Rua 1000, 123')
+
+INSERT INTO Servico(Tipo, Descricao, Valor) VALUES ('Programação', 'Desenvolvimento web', 100)
+INSERT INTO Servico(Tipo, Descricao, Valor) VALUES ('Programação', 'Aplicativo desktop', 100)
+INSERT INTO Servico(Tipo, Descricao, Valor) VALUES ('Programação', 'Aplicativo mobile', 100)
+INSERT INTO Servico(Tipo, Descricao, Valor) VALUES ('Design', 'Criar ou editar vídeo', 80)
+INSERT INTO Servico(Tipo, Descricao, Valor) VALUES ('Design', 'Web design', 80)
+INSERT INTO Servico(Tipo, Descricao, Valor) VALUES ('Design', 'Ilustração', 80)
+INSERT INTO Servico(Tipo, Descricao, Valor) VALUES ('Tradução', 'Tradução de documento', 50)
+INSERT INTO Servico(Tipo, Descricao, Valor) VALUES ('Tradução', 'Revisão de textos', 50)
+INSERT INTO Servico(Tipo, Descricao, Valor) VALUES ('Tradução', 'Legendas', 50)
+
+INSERT INTO Agendamento(DataContrato, PrazoEntrega, IdProfissional, IdCliente, IdServico) VALUES ('18-08-2022', '23-08-2022', 1, 1, 1)
+INSERT INTO Agendamento(DataContrato, PrazoEntrega, IdProfissional, IdCliente, IdServico) VALUES ('', '23-08-2022', 2, 2, 4)
+INSERT INTO Agendamento(DataContrato, PrazoEntrega, IdProfissional, IdCliente, IdServico) VALUES ('18-08-2022', '23-08-2022', 3, 3, 7)

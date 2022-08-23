@@ -1,0 +1,12 @@
+SELECT * FROM Profissional
+
+SELECT * FROM Cliente
+
+SELECT * FROM Servico
+
+SELECT * FROM Agendamento
+
+SELECT a.IdProfissional, p.Nome, a.IdCliente, c.Nome, a.IdServico, s.Tipo, s.Descricao, s.Valor, a.DataContrato, a.PrazoEntrega FROM Agendamento a
+INNER JOIN Profissional p ON p.Id = a.IdProfissional
+INNER JOIN Cliente c ON c.Id = a.IdCliente
+INNER JOIN Servico s ON s.Id = a.IdServico

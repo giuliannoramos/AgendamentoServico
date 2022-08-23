@@ -1,0 +1,46 @@
+CREATE TABLE Profissional
+(
+   Id int IDENTITY(1,1) NOT NULL,
+   Nome varchar (70) NOT NULL,
+   Cnpj varchar (14) NOT NULL,
+   Email varchar (254) NOT NULL,
+   Especialidade varchar (20) NOT NULL,
+   CONSTRAINT Pk_Profissional PRIMARY KEY (Id)
+);
+
+CREATE TABLE Cliente
+(
+   Id int IDENTITY(1,1) NOT NULL,
+   Nome varchar (70) NOT NULL,
+   Cpf varchar (11) NOT NULL,
+   DataNascimento date NOT NULL,
+   Endereco varchar (254) NOT NULL,
+   Email varchar (254) NOT NULL,
+   CONSTRAINT Pk_Cliente PRIMARY KEY (Id)
+);
+
+CREATE TABLE Servico
+(
+   Id int IDENTITY(1,1) NOT NULL,
+   Tipo varchar (20) NOT NULL,
+   Descricao varchar (70) NOT NULL,
+   Valor smallmoney NOT NULL,
+   CONSTRAINT Pk_Servico PRIMARY KEY (Id)
+);
+
+CREATE TABLE Agendamento
+(
+   Id int IDENTITY(1,1) NOT NULL,
+   DataContrato datetime DEFAULT GETDATE(),
+   PrazoEntrega datetime DEFAULT GETDATE(),
+   IdProfissional int NOT NULL,
+   IdCliente int NOT NULL,
+   IdServico int NOT NULL,
+   CONSTRAINT Pk_Agendamento PRIMARY KEY (Id),
+   CONSTRAINT Fk_IdProfissional FOREIGN KEY (Id)
+   REFERENCES Profissional(Id),
+   CONSTRAINT Fk_IdCliente FOREIGN KEY (Id)
+   REFERENCES Cliente(Id),
+   CONSTRAINT Fk_IdServico FOREIGN KEY (Id)
+   REFERENCES Servico(Id)
+);

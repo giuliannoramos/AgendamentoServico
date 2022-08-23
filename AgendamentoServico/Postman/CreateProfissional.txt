@@ -1,0 +1,11 @@
+https://localhost:44311/profissional/create     
+       
+{
+    "profissional":
+    {
+        "nome": "Giulianno",
+        "cnpj": "54528072000135",
+        "email": "giulianno@gmail.com",
+        "especialidade": "Programação"                 
+    }
+}
