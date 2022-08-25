@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace AgendamentoServico.ViewModelUpdate
 {
-    public class UpdateServicoViewModel
+    public class UpdateProfissionalViewModel
     {
-        public Servico servico { get; set; }
+        public ProfissionalDto profissional { get; set; }
     }
 }

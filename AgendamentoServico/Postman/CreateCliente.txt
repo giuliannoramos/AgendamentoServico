@@ -1,0 +1,12 @@
+POST https://localhost:44311/cliente/create
+
+{
+    "cliente":
+    {
+        "nome": "Giulianno",
+        "cpf": "04701657190",
+        "dataNascimento": "1999-08-07",
+        "endereco": "Rua 1000, 123",
+        "email": "giulianno@gmail.com"                  
+    }
+}

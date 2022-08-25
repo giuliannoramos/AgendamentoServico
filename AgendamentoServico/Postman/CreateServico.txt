@@ -1,0 +1,10 @@
+POST https://localhost:44311/servico/create
+
+{
+    "servico":
+    {
+        "tipo": "+18",
+        "descricao": "Onlyfans",
+        "valor": 1000.99                 
+    }
+}

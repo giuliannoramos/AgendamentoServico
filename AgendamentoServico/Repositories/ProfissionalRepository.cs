@@ -56,8 +56,7 @@ namespace AgendamentoServico.Repositories
                 Console.WriteLine("Erro: " + ex.Message);
                 return null;
             }
-
-        }
+        }       
 
         public bool UpdateProfissional(ProfissionalDto profissional)
         {
@@ -82,6 +81,31 @@ namespace AgendamentoServico.Repositories
             catch (Exception ex)
             {
                 Console.WriteLine("Erro: " + ex.Message);
+                return false;
+            }
+        }
+
+        public bool DeleteProfissional(ProfissionalDto profissional)
+        {
+            try
+            {
+                var query = "DELETE FROM Profissional " +
+                    "WHERE Id= @idProfissional";
+
+                using (var sql = new SqlConnection(_connection))
+                {
+                    SqlCommand command = new SqlCommand(query, sql);                    
+                    command.Parameters.AddWithValue("@idProfissional", profissional.Id);
+                    command.Connection.Open();
+                    command.ExecuteScalar();
+                }
+
+                Console.WriteLine("Profissional removido com sucesso.");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
                 return false;
             }
         }

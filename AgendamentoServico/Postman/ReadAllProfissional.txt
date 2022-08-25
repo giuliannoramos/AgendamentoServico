@@ -1,1 +1,1 @@
-https://localhost:44311/profissional/readall
+GET https://localhost:44311/profissional/readall

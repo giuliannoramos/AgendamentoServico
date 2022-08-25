@@ -11,8 +11,7 @@ namespace AgendamentoServico.Models
     {
         private readonly string _connection = @"Data Source=ITELABD12\SQLEXPRESS; Initial Catalog=AgendamentoServico; Integrated Security=True;";
         public bool CreateCliente(Cliente cliente)
-        {
-            int IdClienteCriado = -1;
+        {            
             try
             {
                 var query = @"INSERT INTO Cliente 
@@ -28,7 +27,7 @@ namespace AgendamentoServico.Models
                     command.Parameters.AddWithValue("@endereco", cliente.Endereco);
                     command.Parameters.AddWithValue("@email", cliente.Email);
                     command.Connection.Open();
-                    IdClienteCriado = (int)command.ExecuteScalar();
+                    command.ExecuteScalar();
                 }
 
                 Console.WriteLine("Cliente cadastrado com sucesso.");
@@ -40,5 +39,80 @@ namespace AgendamentoServico.Models
                 return false;
             }
         }
+
+        public List<ClienteDto> ReadAllCliente()
+        {
+            List<ClienteDto> clientesEncontrados;
+            try
+            {
+                var query = @"SELECT Id, Nome, Cpf, DataNascimento, Endereco, Email FROM Cliente";
+
+                using (var connection = new SqlConnection(_connection))
+                {
+                    clientesEncontrados = connection.Query<ClienteDto>(query).ToList();
+                }
+
+                return clientesEncontrados;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro: " + ex.Message);
+                return null;
+            }
+        }
+
+        public bool UpdateCliente(ClienteDto cliente)
+        {
+            try
+            {
+                var query = @"UPDATE Cliente SET Nome = @nome, Cpf = @cpf, DataNascimento = @dataNascimento, Endereco = @endereco, Email = @email WHERE Id = @id";
+                using (var sql = new SqlConnection(_connection))
+                {
+                    SqlCommand command = new SqlCommand(query, sql);
+                    command.Parameters.AddWithValue("@id", cliente.Id);
+                    command.Parameters.AddWithValue("@nome", cliente.Nome);
+                    command.Parameters.AddWithValue("@cpf", cliente.Cpf);
+                    command.Parameters.AddWithValue("@dataNascimento", cliente.DataNascimento);
+                    command.Parameters.AddWithValue("@endereco", cliente.Endereco);
+                    command.Parameters.AddWithValue("@email", cliente.Email);
+                    command.Connection.Open();
+                    command.ExecuteScalar();
+                }
+
+                Console.WriteLine("Cliente atualizado com sucesso.");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro: " + ex.Message);
+                return false;
+            }
+        }
+
+        public bool DeleteCliente(ClienteDto cliente)
+        {
+            try
+            {
+                var query = "DELETE FROM Cliente " +
+                    "WHERE Id= @idCliente";
+
+                using (var sql = new SqlConnection(_connection))
+                {
+                    SqlCommand command = new SqlCommand(query, sql);
+                    command.Parameters.AddWithValue("@idCliente", cliente.Id);
+                    command.Connection.Open();
+                    command.ExecuteScalar();
+                }
+
+                Console.WriteLine("Cliente Removido com sucesso.");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
     }
 }

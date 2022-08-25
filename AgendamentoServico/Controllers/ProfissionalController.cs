@@ -8,8 +8,8 @@ using System.Data.SqlClient;
 using System.Data;
 using AgendamentoServico.Repositories;
 using AgendamentoServico.ViewModelCreate;
-using AgendamentoServico.ViewModelRead;
 using AgendamentoServico.ViewModelUpdate;
+using AgendamentoServico.ViewModelDelete;
 
 namespace AgendamentoServico.Controllers
 {
@@ -18,7 +18,7 @@ namespace AgendamentoServico.Controllers
     public class ProfissionalController : ControllerBase
     {
         private readonly ProfissionalRepository _profissionalRepository;
-        private static readonly List<Profissional> profissionais = new List<Profissional>();
+        
         public ProfissionalController()
         {
             _profissionalRepository = new ProfissionalRepository();
@@ -34,7 +34,7 @@ namespace AgendamentoServico.Controllers
 
             if (resultado) return Ok("Profissional cadastrado com sucesso.");
 
-            return Ok("Houve um problema ao cadastrar. Profissional não cadastrado.");            
+            return Ok("Erro ao cadastrar o profissional.");            
         }
 
         [HttpGet]
@@ -46,7 +46,31 @@ namespace AgendamentoServico.Controllers
                 return NotFound();
 
             return Ok(resultado);
-        }       
+        }
+
+        [HttpPut]
+        public IActionResult Update(UpdateProfissionalViewModel updateProfissionalViewModel)
+        {
+
+            var resultado = _profissionalRepository.UpdateProfissional(updateProfissionalViewModel.profissional);
+
+            if (resultado) return Ok("Profissional atualizado com sucesso. ");
+            return Ok(new
+            {
+                sucesso = false,
+                mensagem = "Erro ao atualizar o profisisonal."
+            });            
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(DeleteProfissionalViewModel deleteProfissionalViewModel)
+        {
+            var resultado = _profissionalRepository.DeleteProfissional(deleteProfissionalViewModel.profissional);
+
+            if (resultado) return Ok("Profissional removido com sucesso.");
+
+            return Ok("Erro ao deletar o profissional.");
+        }
 
     }
 }

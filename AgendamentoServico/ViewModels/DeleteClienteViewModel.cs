@@ -7,6 +7,6 @@ namespace AgendamentoServico.ViewModelDelete
 {
     public class DeleteClienteViewModel
     {
-        public Cliente cliente { get; set; }
+        public ClienteDto cliente { get; set; }
     }
 }

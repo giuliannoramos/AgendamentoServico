@@ -10,8 +10,8 @@ namespace AgendamentoServico
         public int Id { get; set; }
         public DateTime DataContrato { get; set; }
         public DateTime PrazoEntrega { get; set; }
-        ProfissionalDto IdProfissional { get; set; }
-        ClienteDto IdCliente { get; set; }
-        ServicoDto IdServico { get; set; }
+        public ProfissionalDto IdProfissional { get; set; }
+        public ClienteDto IdCliente { get; set; }
+        public ServicoDto IdServico { get; set; }
     }
 }

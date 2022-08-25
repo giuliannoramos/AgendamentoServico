@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AgendamentoServico.ViewModelRead
+namespace AgendamentoServico.ViewModels
 {
     public class ReadAgendamentoViewModel
     {
-        public Agendamento agendamento { get; set; }
+        public AgendamentoDto agendamento { get; set; }
     }
 }
