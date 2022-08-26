@@ -7,6 +7,7 @@ namespace AgendamentoServico.ViewModelUpdate
 {
     public class UpdateProfissionalViewModel
     {
-        public ProfissionalDto profissional { get; set; }
+        public ProfissionalDto Profissional { get; set; }    
+        public int Id { get; set; }
     }
 }

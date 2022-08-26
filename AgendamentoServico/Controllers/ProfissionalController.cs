@@ -52,7 +52,7 @@ namespace AgendamentoServico.Controllers
         public IActionResult Update(UpdateProfissionalViewModel updateProfissionalViewModel)
         {
 
-            var resultado = _profissionalRepository.UpdateProfissional(updateProfissionalViewModel.profissional);
+            var resultado = _profissionalRepository.UpdateProfissional(updateProfissionalViewModel.Profissional, updateProfissionalViewModel.Id);
 
             if (resultado) return Ok("Profissional atualizado com sucesso. ");
             return Ok(new

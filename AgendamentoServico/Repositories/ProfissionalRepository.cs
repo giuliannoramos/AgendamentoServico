@@ -58,7 +58,7 @@ namespace AgendamentoServico.Repositories
             }
         }       
 
-        public bool UpdateProfissional(ProfissionalDto profissional)
+        public bool UpdateProfissional(ProfissionalDto profissional, int id)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace AgendamentoServico.Repositories
                 using (var sql = new SqlConnection(_connection))
                 {
                     SqlCommand command = new SqlCommand(query, sql);
-                    command.Parameters.AddWithValue("@id", profissional.Id);
+                    command.Parameters.AddWithValue("@id", id);
                     command.Parameters.AddWithValue("@nome", profissional.Nome);
                     command.Parameters.AddWithValue("@cnpj", profissional.Cnpj);
                     command.Parameters.AddWithValue("@email", profissional.Email);
