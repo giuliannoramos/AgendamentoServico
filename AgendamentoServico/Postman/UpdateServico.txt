@@ -1,0 +1,11 @@
+PUT https://localhost:44311/servico/update
+
+{
+    "servico":
+    {
+        "id": 21,
+        "tipo": "teste2",
+        "descricao": "oloco",
+        "valor": 1.99                 
+    }
+}

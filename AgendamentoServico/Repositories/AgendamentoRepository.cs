@@ -39,7 +39,7 @@ namespace AgendamentoServico.Repositories
             }
         }
 
-        public List<AgendamentoDto> ReadAllAgendamento(AgendamentoDto agendamento)
+        public List<AgendamentoDto> ReadAllAgendamento()
         {
             List<AgendamentoDto> agendamentosEncontrados;
             try

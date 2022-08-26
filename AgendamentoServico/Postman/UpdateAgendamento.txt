@@ -1,0 +1,13 @@
+PUT https://localhost:44311/agendamento/update
+
+{
+    "agendamento":
+    {
+        "id": 1,
+        "dataContrato": "2020-04-18",
+        "prazoEntrega": "2022-08-25",
+        "idProfissional": 10,
+        "idCliente": 7,
+        "idServico": 22                 
+    }
+}

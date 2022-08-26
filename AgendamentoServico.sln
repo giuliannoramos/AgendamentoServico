@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32407.337
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgendamentoServico", "AgendamentoServico\AgendamentoServico.csproj", "{F5C52C48-6FDA-4527-AA1E-FBA4C32A525B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgendamentoServico", "AgendamentoServico\AgendamentoServico.csproj", "{F5C52C48-6FDA-4527-AA1E-FBA4C32A525B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgendamentoServico.Client", "AgendamentoServico.Client\AgendamentoServico.Client.csproj", "{6B63812D-CB98-4AD8-969E-8FB970F445CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{F5C52C48-6FDA-4527-AA1E-FBA4C32A525B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5C52C48-6FDA-4527-AA1E-FBA4C32A525B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5C52C48-6FDA-4527-AA1E-FBA4C32A525B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B63812D-CB98-4AD8-969E-8FB970F445CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B63812D-CB98-4AD8-969E-8FB970F445CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B63812D-CB98-4AD8-969E-8FB970F445CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B63812D-CB98-4AD8-969E-8FB970F445CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

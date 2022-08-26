@@ -15,8 +15,7 @@ namespace AgendamentoServico.Models
             try
             {
                 var query = @"INSERT INTO Cliente 
-                              (Nome, Cpf, DataNascimento, Endereco, Email) 
-                              OUTPUT Inserted.Id
+                              (Nome, Cpf, DataNascimento, Endereco, Email)                              
                               VALUES (@nome,@cpf,@dataNascimento,@endereco,@email)";
                 using (var sql = new SqlConnection(_connection))
                 {

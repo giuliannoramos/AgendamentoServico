@@ -1,7 +1,6 @@
 ﻿using AgendamentoServico.Repositories;
 using AgendamentoServico.ViewModelCreate;
 using AgendamentoServico.ViewModelDelete;
-using AgendamentoServico.ViewModels;
 using AgendamentoServico.ViewModelUpdate;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -37,9 +36,9 @@ namespace AgendamentoServico.Controllers
         }
 
         [HttpGet]
-        public IActionResult ReadAll(ReadAgendamentoViewModel readAgendamentoViewModel)
+        public IActionResult ReadAll()
         {
-            var resultado = _agendamentoRepository.ReadAllAgendamento(readAgendamentoViewModel.agendamento);
+            var resultado = _agendamentoRepository.ReadAllAgendamento();
 
             if (resultado == null)
                 return NotFound();

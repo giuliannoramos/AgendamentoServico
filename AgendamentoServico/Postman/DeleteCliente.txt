@@ -1,0 +1,8 @@
+DELETE https://localhost:44311/cliente/delete
+
+{
+    "cliente":
+    {
+        "id": 7
+    }
+}
