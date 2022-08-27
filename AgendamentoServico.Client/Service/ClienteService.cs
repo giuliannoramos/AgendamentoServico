@@ -3,27 +3,28 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using AgendamentoServico.Client.Dtos;
+using AgendamentoServico.Client.Models;
 using Newtonsoft.Json;
 
 namespace AgendamentoServico.Client.Service
 {
-    public class ProfissionalService
+    class ClienteService
     {
-        public void Cadastrar(Profissional profissional)
+        public void Cadastrar(Cliente cliente)
         {
             HttpClient httpClient = new HttpClient();
             HttpResponseMessage response;
 
             var viewModel = new
             {
-                profissional = profissional,                
+                cliente = cliente,
             };
 
             try
             {
                 var json = JsonConvert.SerializeObject(viewModel);
                 //monta a request para a api;                
-                response = httpClient.PostAsync($"https://localhost:44311/profissional/create", new StringContent(json, Encoding.UTF8, "application/json")).Result;
+                response = httpClient.PostAsync($"https://localhost:44311/cliente/create", new StringContent(json, Encoding.UTF8, "application/json")).Result;
 
                 var resultado = response.Content.ReadAsStringAsync().Result;
 
@@ -41,14 +42,14 @@ namespace AgendamentoServico.Client.Service
             }
         }
 
-        public void Atualizar(int id, Profissional profissional)
+        public void Atualizar(int id, Cliente cliente)
         {
             HttpClient httpClient = new HttpClient();
             HttpResponseMessage response;
 
             var viewModel = new
             {
-                profissional = profissional,
+                cliente = cliente,
                 id
             };
 
@@ -56,40 +57,7 @@ namespace AgendamentoServico.Client.Service
             {
                 var json = JsonConvert.SerializeObject(viewModel);
                 //monta a request para a api;                
-                response = httpClient.PutAsync($"https://localhost:44311/profissional/update", new StringContent(json, Encoding.UTF8, "application/json")).Result;
-
-                var resultado = response.Content.ReadAsStringAsync().Result;
-
-                if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-                {
-                    Console.WriteLine(resultado);
-                }
-
-                //converte os dados recebidos e retorna eles como objetos do C#;
-
-            }
-            catch (HttpRequestException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-        public void Deletar(int id, ProfissionalDto profissional)
-        {
-            HttpClient httpClient = new HttpClient();
-            HttpResponseMessage response;
-
-            var viewModel = new
-            {
-                profissional = profissional,
-                id
-            };
-
-            try
-            {
-                var json = JsonConvert.SerializeObject(viewModel);
-                //monta a request para a api;                
-                response = httpClient.DeleteAsync($"https://localhost:44311/profissional/delete").Result;
+                response = httpClient.PutAsync($"https://localhost:44311/cliente/update", new StringContent(json, Encoding.UTF8, "application/json")).Result;
 
                 var resultado = response.Content.ReadAsStringAsync().Result;
 
