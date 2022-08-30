@@ -16,6 +16,7 @@ namespace AgendamentoServico.Client
             var profissionalService = new ProfissionalService();
             var clienteService = new ClienteService();
             var servicoService = new ServicoService();
+            var agendamentoService = new AgendamentoService();
 
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("\n\n Informe a operação desejada:");
@@ -36,17 +37,17 @@ namespace AgendamentoServico.Client
             Console.WriteLine(" 14 - Remover um cliente cadastrado.");
             Console.WriteLine(" 15 - Remover um serviço cadastrado.");
             Console.WriteLine(" 16 - Remover um agendamento cadastrado.");
-            Console.WriteLine(" 0 - Sair");
+            Console.WriteLine(" 0 - Sair\n");
             int opcao = Convert.ToInt32(Console.ReadLine());
             while (opcao != 0)
             {
                 if (opcao == 1)
                 {
                     Console.WriteLine("\nInsira os dados do profissional:");
-                    Console.WriteLine("Nome");
-                    Console.WriteLine("Cnpj");
-                    Console.WriteLine("Email");
-                    Console.WriteLine("Especialidade\n");
+                    Console.WriteLine("Nome:");
+                    Console.WriteLine("Cnpj:");
+                    Console.WriteLine("Email:");
+                    Console.WriteLine("Especialidade:\n");
 
                     var profissional = new Profissional()
                     {
@@ -63,11 +64,11 @@ namespace AgendamentoServico.Client
                 else if (opcao == 2)
                 {
                     Console.WriteLine("\nInsira os dados do cliente:");
-                    Console.WriteLine("Nome");
-                    Console.WriteLine("Cpf");
-                    Console.WriteLine("Data de Nascimento");
-                    Console.WriteLine("Endereço");
-                    Console.WriteLine("Email\n");
+                    Console.WriteLine("Nome:");
+                    Console.WriteLine("Cpf:");
+                    Console.WriteLine("Data de Nascimento:");
+                    Console.WriteLine("Endereço:");
+                    Console.WriteLine("Email:\n");
 
                     var cliente = new Cliente()
                     {
@@ -85,9 +86,9 @@ namespace AgendamentoServico.Client
                 else if (opcao == 3)
                 {
                     Console.WriteLine("\nInsira os dados do serviço:");
-                    Console.WriteLine("Tipo");
-                    Console.WriteLine("Descrição");
-                    Console.WriteLine("Valor\n");                    
+                    Console.WriteLine("Tipo:");
+                    Console.WriteLine("Descrição:");
+                    Console.WriteLine("Valor:\n");                    
 
                     var servico = new Servico()
                     {
@@ -102,7 +103,24 @@ namespace AgendamentoServico.Client
 
                 else if (opcao == 4)
                 {
-                    
+                    Console.WriteLine("\nInsira os dados do agendamento:");
+                    Console.WriteLine("Data de contrato:");
+                    Console.WriteLine("Prazo de entrega:");
+                    Console.WriteLine("Id do profissional:");
+                    Console.WriteLine("Id do Cliente:");
+                    Console.WriteLine("Id do Serviço:\n");
+
+                    var agendamento = new Agendamento()
+                    {
+                        DataContrato = Convert.ToDateTime(Console.ReadLine()),
+                        PrazoEntrega = Convert.ToDateTime(Console.ReadLine()),
+                        IdProfissional = Convert.ToInt32(Console.ReadLine()),
+                        IdCliente = Convert.ToInt32(Console.ReadLine()),
+                        IdServico = Convert.ToInt32(Console.ReadLine()),                        
+                    };
+
+                    agendamentoService.Cadastrar(agendamento);
+                    Console.WriteLine("\n Agendamento cadastrado com sucesso.");
                 }
 
                 else if (opcao == 5)
@@ -167,7 +185,23 @@ namespace AgendamentoServico.Client
 
                 else if (opcao == 8)
                 {
-
+                    var resultado = ListarAgendamentos();
+                    //mostra os dados na tela                    
+                    foreach (var item in resultado)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("\n=====================================");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("Id: " + item.Id);
+                        Console.WriteLine("Data de contrato: " + item.DataContrato);
+                        Console.WriteLine("Prazo de entrega: " + item.PrazoEntrega);
+                        Console.WriteLine("Id do profissional: " + item.IdProfissional);
+                        Console.WriteLine("Id do cliente: " + item.IdCliente);
+                        Console.WriteLine("Id do serviço: " + item.IdServico);
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("=====================================");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
                 }
 
                 else if (opcao == 9)
@@ -181,7 +215,7 @@ namespace AgendamentoServico.Client
                     Console.WriteLine("Email");                    
                     Console.WriteLine("Especialidade\n");                    
 
-                    var profissional = new Profissional()
+                    var profissional = new ProfissionalDto()
                     {
                         Nome = Console.ReadLine(),
                         Cnpj = Console.ReadLine(),
@@ -205,7 +239,7 @@ namespace AgendamentoServico.Client
                     Console.WriteLine("Endereço");
                     Console.WriteLine("Email\n");
 
-                    var cliente = new Cliente()
+                    var cliente = new ClienteDto()
                     {
                         Nome = Console.ReadLine(),
                         Cpf = Console.ReadLine(),
@@ -228,7 +262,7 @@ namespace AgendamentoServico.Client
                     Console.WriteLine("Descrição");
                     Console.WriteLine("Valor\n");                    
 
-                    var servico = new Servico()
+                    var servico = new ServicoDto()
                     {
                         Tipo = Console.ReadLine(),
                         Descricao = Console.ReadLine(),
@@ -241,7 +275,27 @@ namespace AgendamentoServico.Client
 
                 else if (opcao == 12)
                 {
+                    Console.WriteLine("Informe o id do agendamento para atualizar:");
+                    int id = Convert.ToInt32(Console.ReadLine());
 
+                    Console.WriteLine("\nInsira os novos dados do agendamento:");
+                    Console.WriteLine("Data de contrato:");
+                    Console.WriteLine("Prazo de entrega:");
+                    Console.WriteLine("Id do profissional:");
+                    Console.WriteLine("Id do Cliente:");
+                    Console.WriteLine("Id do Serviço:\n");
+
+                    var agendamento = new AgendamentoDto()
+                    {
+                        DataContrato = Convert.ToDateTime(Console.ReadLine()),
+                        PrazoEntrega = Convert.ToDateTime(Console.ReadLine()),
+                        IdProfissional = Convert.ToInt32(Console.ReadLine()),
+                        IdCliente = Convert.ToInt32(Console.ReadLine()),
+                        IdServico = Convert.ToInt32(Console.ReadLine()),
+                    };
+
+                    agendamentoService.Atualizar(id, agendamento);
+                    Console.WriteLine("\n Agendamento atualizado com sucesso.");
                 }
 
                 else if (opcao == 13)
@@ -250,22 +304,34 @@ namespace AgendamentoServico.Client
                     int id = Convert.ToInt32(Console.ReadLine());
 
                     profissionalService.Deletar(id);
-                    Console.WriteLine("\nProfissional deletado com sucesso.");
+                    Console.WriteLine("\n Profissional deletado com sucesso.");
                 }
 
                 else if (opcao == 14)
                 {
+                    Console.WriteLine("Informe o id do cliente para deletar:");
+                    int id = Convert.ToInt32(Console.ReadLine());
 
+                    clienteService.Deletar(id);
+                    Console.WriteLine("\n Cliente deletado com sucesso.");
                 }
 
                 else if (opcao == 15)
                 {
+                    Console.WriteLine("Informe o id do serviço para deletar:");
+                    int id = Convert.ToInt32(Console.ReadLine());
 
+                    servicoService.Deletar(id);
+                    Console.WriteLine("\n Serviço deletado com sucesso.");
                 }
 
                 else if (opcao == 16)
                 {
+                    Console.WriteLine("Informe o id do agendamento para deletar:");
+                    int id = Convert.ToInt32(Console.ReadLine());
 
+                    agendamentoService.Deletar(id);
+                    Console.WriteLine("\n Agendamento deletado com sucesso.");
                 }
 
                 Console.ForegroundColor = ConsoleColor.Cyan;
@@ -287,7 +353,7 @@ namespace AgendamentoServico.Client
                 Console.WriteLine(" 14 - Remover um cliente cadastrado.");
                 Console.WriteLine(" 15 - Remover um serviço cadastrado.");
                 Console.WriteLine(" 16 - Remover um agendamento cadastrado.");
-                Console.WriteLine(" 0 - Sair");
+                Console.WriteLine(" 0 - Sair\n");
                 opcao = Convert.ToInt32(Console.ReadLine());
             }
         }
@@ -297,7 +363,7 @@ namespace AgendamentoServico.Client
             HttpClient httpClient = new HttpClient();
             HttpResponseMessage response;
 
-            //Busca todos os clientes dentro da api;
+            //Busca todos os profissionais dentro da api;
             try
             {
                 //monta a request para a api;
@@ -359,7 +425,7 @@ namespace AgendamentoServico.Client
             HttpClient httpClient = new HttpClient();
             HttpResponseMessage response;
 
-            //Busca todos os clientes dentro da api;
+            //Busca todos os serviços dentro da api;
             try
             {
                 //monta a request para a api;
@@ -384,6 +450,37 @@ namespace AgendamentoServico.Client
                 return new List<ServicoDto>();
             }
         }
-               
+
+        public static List<AgendamentoDto> ListarAgendamentos()
+        {
+            HttpClient httpClient = new HttpClient();
+            HttpResponseMessage response;
+
+            //Busca todos os agendamentos dentro da api;
+            try
+            {
+                //monta a request para a api;
+                response = httpClient.GetAsync("https://localhost:44311/agendamento/readall").Result;
+                response.EnsureSuccessStatusCode();
+
+                var resultado = response.Content.ReadAsStringAsync().Result;
+
+                if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    Console.WriteLine(resultado);
+                    return new List<AgendamentoDto>();
+                }
+                //converte os dados recebidos e retorna eles como objetos do C#;
+                var objetoDesserializado = JsonConvert.DeserializeObject<List<AgendamentoDto>>(resultado);
+
+                return objetoDesserializado;
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new List<AgendamentoDto>();
+            }
+        }
+
     }
 }

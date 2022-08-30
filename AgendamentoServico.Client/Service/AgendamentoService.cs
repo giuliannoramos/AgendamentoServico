@@ -9,26 +9,26 @@ using Newtonsoft.Json;
 
 namespace AgendamentoServico.Client.Service
 {
-    class ServicoService
+    class AgendamentoService
     {
-        public void Cadastrar(Servico servico)
+        public void Cadastrar(Agendamento agendamento)
         {
             HttpClient httpClient = new HttpClient();
             HttpResponseMessage response;
 
             var viewModel = new
             {
-                servico = servico,
+                agendamento = agendamento,
             };
 
             try
-            {                            
-                response = httpClient.CreateAsJsonAsync($"https://localhost:44311/servico/create", viewModel).Result;                
+            {
+                response = httpClient.CreateAsJsonAsync($"https://localhost:44311/agendamento/create", viewModel).Result;
 
                 if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
                     Console.WriteLine(response);
-                }                
+                }
 
             }
             catch (HttpRequestException ex)
@@ -37,25 +37,25 @@ namespace AgendamentoServico.Client.Service
             }
         }
 
-        public void Atualizar(int id, ServicoDto servico)
+        public void Atualizar(int id, AgendamentoDto agendamento)
         {
             HttpClient httpClient = new HttpClient();
             HttpResponseMessage response;
 
             var viewModel = new
             {
-                servico = servico,
+                agendamento = agendamento,
                 id
             };
 
             try
-            {                
-                response = httpClient.UpdateAsJsonAsync($"https://localhost:44311/servico/update", viewModel).Result;                
+            {
+                response = httpClient.UpdateAsJsonAsync($"https://localhost:44311/agendamento/update", viewModel).Result;
 
                 if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
                     Console.WriteLine(response);
-                }                
+                }
 
             }
             catch (HttpRequestException ex)
@@ -76,7 +76,7 @@ namespace AgendamentoServico.Client.Service
 
             try
             {
-                response = httpClient.DeleteAsJsonAsync($"https://localhost:44311/servico/delete", viewModel).Result;
+                response = httpClient.DeleteAsJsonAsync($"https://localhost:44311/agendamento/delete", viewModel).Result;
 
                 if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
@@ -89,6 +89,5 @@ namespace AgendamentoServico.Client.Service
                 Console.WriteLine(ex.Message);
             }
         }
-
     }
 }
