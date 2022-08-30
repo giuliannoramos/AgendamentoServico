@@ -249,9 +249,7 @@ namespace AgendamentoServico.Client
                     Console.WriteLine("Informe o id do profissional para deletar:");
                     int id = Convert.ToInt32(Console.ReadLine());
 
-                    ProfissionalDto profissional = new ProfissionalDto();                
-                    
-                    profissionalService.Deletar(id, profissional);
+                    profissionalService.Deletar(id);
                     Console.WriteLine("\nProfissional deletado com sucesso.");
                 }
 
@@ -386,6 +384,6 @@ namespace AgendamentoServico.Client
                 return new List<ServicoDto>();
             }
         }
-
+               
     }
 }

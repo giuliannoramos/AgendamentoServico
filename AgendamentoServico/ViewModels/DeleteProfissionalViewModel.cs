@@ -8,5 +8,6 @@ namespace AgendamentoServico.ViewModelDelete
     public class DeleteProfissionalViewModel
     {
         public ProfissionalDto profissional { get; set; }
+        public int Id { get; set; }
     }
 }

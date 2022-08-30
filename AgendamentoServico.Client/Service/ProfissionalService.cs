@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
-using AgendamentoServico.Client.Dtos;
+using AgendamentoServico.Client.Extensions;
 using Newtonsoft.Json;
 
 namespace AgendamentoServico.Client.Service
@@ -55,17 +55,13 @@ namespace AgendamentoServico.Client.Service
             try
             {
                 var json = JsonConvert.SerializeObject(viewModel);
-                //monta a request para a api;                
-                response = httpClient.PutAsync($"https://localhost:44311/profissional/update", new StringContent(json, Encoding.UTF8, "application/json")).Result;
-
-                var resultado = response.Content.ReadAsStringAsync().Result;
+                
+                response = httpClient.UpdateAsJsonAsync($"https://localhost:44311/profissional/update", viewModel).Result;                
 
                 if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
-                    Console.WriteLine(resultado);
+                    Console.WriteLine(response);
                 }
-
-                //converte os dados recebidos e retorna eles como objetos do C#;
 
             }
             catch (HttpRequestException ex)
@@ -74,32 +70,25 @@ namespace AgendamentoServico.Client.Service
             }
         }
 
-        public void Deletar(int id, ProfissionalDto profissional)
+        public void Deletar(int id)
         {
-            HttpClient httpClient = new HttpClient();
+            HttpClient httpClient = new HttpClient();            
             HttpResponseMessage response;
 
             var viewModel = new
-            {
-                profissional = profissional,
+            {                
                 id
             };
 
             try
-            {
-                var json = JsonConvert.SerializeObject(viewModel);
-                //monta a request para a api;                
-                response = httpClient.DeleteAsync($"https://localhost:44311/profissional/delete").Result;
-
-                var resultado = response.Content.ReadAsStringAsync().Result;
-
+            {                
+                response = httpClient.DeleteAsJsonAsync($"https://localhost:44311/profissional/delete", viewModel).Result;
+                
                 if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
-                    Console.WriteLine(resultado);
-                }
-
-                //converte os dados recebidos e retorna eles como objetos do C#;
-
+                    Console.WriteLine(response);
+                } 
+                
             }
             catch (HttpRequestException ex)
             {

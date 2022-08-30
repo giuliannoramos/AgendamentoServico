@@ -85,17 +85,17 @@ namespace AgendamentoServico.Repositories
             }
         }
 
-        public bool DeleteProfissional(ProfissionalDto profissional)
+        public bool DeleteProfissional(int id)
         {
             try
             {
                 var query = "DELETE FROM Profissional " +
-                    "WHERE Id= @idProfissional";
+                    "WHERE Id = @id";
 
                 using (var sql = new SqlConnection(_connection))
                 {
                     SqlCommand command = new SqlCommand(query, sql);                    
-                    command.Parameters.AddWithValue("@idProfissional", profissional.Id);
+                    command.Parameters.AddWithValue("@id", id);
                     command.Connection.Open();
                     command.ExecuteScalar();
                 }

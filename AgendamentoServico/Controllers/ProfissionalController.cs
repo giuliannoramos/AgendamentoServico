@@ -65,7 +65,7 @@ namespace AgendamentoServico.Controllers
         [HttpDelete]
         public IActionResult Delete(DeleteProfissionalViewModel deleteProfissionalViewModel)
         {
-            var resultado = _profissionalRepository.DeleteProfissional(deleteProfissionalViewModel.profissional);
+            var resultado = _profissionalRepository.DeleteProfissional(deleteProfissionalViewModel.Id);
 
             if (resultado) return Ok("Profissional removido com sucesso.");
 
