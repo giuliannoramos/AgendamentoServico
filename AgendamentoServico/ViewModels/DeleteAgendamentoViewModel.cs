@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace AgendamentoServico.ViewModelDelete
 {
     public class DeleteAgendamentoViewModel
-    {
-        public AgendamentoDto agendamento { get; set; }
+    {        
+        public int Id { get; set; }
     }
 }

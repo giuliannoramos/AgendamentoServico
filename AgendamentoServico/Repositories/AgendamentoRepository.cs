@@ -60,7 +60,7 @@ namespace AgendamentoServico.Repositories
             }
         }
 
-        public bool UpdateAgendamento(AgendamentoDto agendamento)
+        public bool UpdateAgendamento(AgendamentoDto agendamento, int id)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace AgendamentoServico.Repositories
                 using (var sql = new SqlConnection(_connection))
                 {
                     SqlCommand command = new SqlCommand(query, sql);
-                    command.Parameters.AddWithValue("@id", agendamento.Id);
+                    command.Parameters.AddWithValue("@id", id);
                     command.Parameters.AddWithValue("@dataContrato", agendamento.DataContrato);
                     command.Parameters.AddWithValue("@prazoEntrega", agendamento.PrazoEntrega);
                     command.Parameters.AddWithValue("@idProfissional", agendamento.IdProfissional);
@@ -88,17 +88,17 @@ namespace AgendamentoServico.Repositories
             }
         }
 
-        public bool DeleteAgendamento(AgendamentoDto agendamento)
+        public bool DeleteAgendamento(int id)
         {
             try
             {
                 var query = "DELETE FROM Agendamento " +
-                    "WHERE Id= @idAgendamento";
+                    "WHERE Id= @id";
 
                 using (var sql = new SqlConnection(_connection))
                 {
                     SqlCommand command = new SqlCommand(query, sql);
-                    command.Parameters.AddWithValue("@idAgendamento", agendamento.Id);
+                    command.Parameters.AddWithValue("@id", id);
                     command.Connection.Open();
                     command.ExecuteScalar();
                 }

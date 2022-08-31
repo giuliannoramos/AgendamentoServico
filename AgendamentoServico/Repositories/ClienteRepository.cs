@@ -60,7 +60,7 @@ namespace AgendamentoServico.Models
             }
         }
 
-        public bool UpdateCliente(ClienteDto cliente)
+        public bool UpdateCliente(ClienteDto cliente, int id)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace AgendamentoServico.Models
                 using (var sql = new SqlConnection(_connection))
                 {
                     SqlCommand command = new SqlCommand(query, sql);
-                    command.Parameters.AddWithValue("@id", cliente.Id);
+                    command.Parameters.AddWithValue("@id", id);
                     command.Parameters.AddWithValue("@nome", cliente.Nome);
                     command.Parameters.AddWithValue("@cpf", cliente.Cpf);
                     command.Parameters.AddWithValue("@dataNascimento", cliente.DataNascimento);
@@ -88,17 +88,17 @@ namespace AgendamentoServico.Models
             }
         }
 
-        public bool DeleteCliente(ClienteDto cliente)
+        public bool DeleteCliente(int id)
         {
             try
             {
                 var query = "DELETE FROM Cliente " +
-                    "WHERE Id= @idCliente";
+                    "WHERE Id= @id";
 
                 using (var sql = new SqlConnection(_connection))
                 {
                     SqlCommand command = new SqlCommand(query, sql);
-                    command.Parameters.AddWithValue("@idCliente", cliente.Id);
+                    command.Parameters.AddWithValue("@id", id);
                     command.Connection.Open();
                     command.ExecuteScalar();
                 }

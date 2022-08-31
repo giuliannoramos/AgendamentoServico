@@ -8,5 +8,6 @@ namespace AgendamentoServico.ViewModelUpdate
     public class UpdateAgendamentoViewModel
     {
         public AgendamentoDto agendamento { get; set; }
+        public int Id { get; set; }
     }
 }

@@ -50,7 +50,7 @@ namespace AgendamentoServico.Controllers
         public IActionResult Update(UpdateAgendamentoViewModel updateAgendamentoViewModel)
         {
 
-            var resultado = _agendamentoRepository.UpdateAgendamento(updateAgendamentoViewModel.agendamento);
+            var resultado = _agendamentoRepository.UpdateAgendamento(updateAgendamentoViewModel.agendamento, updateAgendamentoViewModel.Id);
 
             if (resultado) return Ok("Agendamento atualizado com sucesso. ");
             return Ok(new
@@ -63,7 +63,7 @@ namespace AgendamentoServico.Controllers
         [HttpDelete]
         public IActionResult Delete(DeleteAgendamentoViewModel deleteAgendamentoViewModel)
         {
-            var resultado = _agendamentoRepository.DeleteAgendamento(deleteAgendamentoViewModel.agendamento);
+            var resultado = _agendamentoRepository.DeleteAgendamento(deleteAgendamentoViewModel.Id);
 
             if (resultado) return Ok("Agendamento removido com sucesso.");
 

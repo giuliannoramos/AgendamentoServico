@@ -58,7 +58,7 @@ namespace AgendamentoServico.Repositories
             }
         }
 
-        public bool UpdateServico(ServicoDto servico)
+        public bool UpdateServico(ServicoDto servico, int id)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace AgendamentoServico.Repositories
                 using (var sql = new SqlConnection(_connection))
                 {
                     SqlCommand command = new SqlCommand(query, sql);
-                    command.Parameters.AddWithValue("@id", servico.Id);
+                    command.Parameters.AddWithValue("@id", id);
                     command.Parameters.AddWithValue("@tipo", servico.Tipo);
                     command.Parameters.AddWithValue("@descricao", servico.Descricao);
                     command.Parameters.AddWithValue("@valor", servico.Valor);                    
@@ -84,17 +84,17 @@ namespace AgendamentoServico.Repositories
             }
         }
 
-        public bool DeleteServico(ServicoDto servico)
+        public bool DeleteServico(int id)
         {
             try
             {
                 var query = "DELETE FROM Servico " +
-                    "WHERE Id= @idServico";
+                    "WHERE Id= @id";
 
                 using (var sql = new SqlConnection(_connection))
                 {
                     SqlCommand command = new SqlCommand(query, sql);
-                    command.Parameters.AddWithValue("@idServico", servico.Id);
+                    command.Parameters.AddWithValue("@id", id);
                     command.Connection.Open();
                     command.ExecuteScalar();
                 }

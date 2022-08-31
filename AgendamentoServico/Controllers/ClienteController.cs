@@ -50,7 +50,7 @@ namespace AgendamentoServico.Controllers
         public IActionResult Update(UpdateClienteViewModel updateClienteViewModel)
         {
 
-            var resultado = _clienteRepository.UpdateCliente(updateClienteViewModel.cliente);
+            var resultado = _clienteRepository.UpdateCliente(updateClienteViewModel.cliente, updateClienteViewModel.Id);
 
             if (resultado) return Ok("Cliente atualizado com sucesso. ");
             return Ok(new
@@ -63,7 +63,7 @@ namespace AgendamentoServico.Controllers
         [HttpDelete]
         public IActionResult Delete(DeleteClienteViewModel deleteClienteViewModel)
         {
-            var resultado = _clienteRepository.DeleteCliente(deleteClienteViewModel.cliente);
+            var resultado = _clienteRepository.DeleteCliente(deleteClienteViewModel.Id);
 
             if (resultado) return Ok("Cliente removido com sucesso.");
 
