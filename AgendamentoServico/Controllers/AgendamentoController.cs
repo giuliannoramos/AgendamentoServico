@@ -70,5 +70,16 @@ namespace AgendamentoServico.Controllers
             return Ok("Erro ao deletar o agendamento.");
         }
 
+        [HttpGet]
+        public IActionResult ListarAgendamentosParaHoje()
+        {
+            var resultado = _agendamentoRepository.ListarAgendamentosParaHojeDetalhado();
+
+            if (resultado == null)
+                return NotFound();
+
+            return Ok(resultado);
+        }
+
     }
 }

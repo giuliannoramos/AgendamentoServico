@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Dapper;
+using AgendamentoServico.Dtos;
 
 namespace AgendamentoServico.Repositories
 {
@@ -113,5 +114,29 @@ namespace AgendamentoServico.Repositories
             }
         }
 
+        public List<AgendamentoDetalhadoDto> ListarAgendamentosParaHojeDetalhado()
+        {
+            List<AgendamentoDetalhadoDto> agendamentosEncontrados;
+            try
+            {                
+                var query = @"SELECT a.Id, a.DataContrato, a.PrazoEntrega, a.IdProfissional, p.Nome, a.IdCliente, c.Nome, a.IdServico, s.Tipo, s.Descricao, s.Valor FROM Agendamento a
+                              INNER JOIN Profissional p ON p.Id = a.IdProfissional
+                              INNER JOIN Cliente c ON c.Id = a.IdCliente
+                              INNER JOIN Servico s ON s.Id = a.IdServico
+                              WHERE PrazoEntrega > getdate() - 1 and PrazoEntrega < getdate() + 1";
+
+                using (var connection = new SqlConnection(_connection))
+                {                                      
+                    agendamentosEncontrados = connection.Query<AgendamentoDetalhadoDto>(query).ToList();                    
+                }
+
+                return agendamentosEncontrados;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro: " + ex.Message);                
+                return null;                
+            }
+        }
     }
 }
