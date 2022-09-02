@@ -39,6 +39,8 @@ namespace AgendamentoServico.Client
             Console.WriteLine(" 15 - Remover um serviço cadastrado.");
             Console.WriteLine(" 16 - Remover um agendamento cadastrado.");
             Console.WriteLine("\n 17 - Listar agendamentos detalhados para hoje.");
+            Console.WriteLine(" 18 - Mostrar numero total de agendamentos.");
+            Console.WriteLine(" 19 - Mostrar arrecadamento total dos agendamentos.");
             Console.WriteLine("\n 0 - Sair \n");
             int opcao = Convert.ToInt32(Console.ReadLine());
             while (opcao != 0)
@@ -342,7 +344,9 @@ namespace AgendamentoServico.Client
                     //mostra os dados na tela
                     if (resultado == null || !resultado.Any())
                     {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine("Não há agendamentos para hoje.");
+                        Console.ForegroundColor = ConsoleColor.White;
                     }
 
                     else
@@ -373,6 +377,20 @@ namespace AgendamentoServico.Client
                     }
                 }
 
+                else if (opcao == 18)
+                {                    
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine($"\n A quantidade total de agendamentos é: {NumeroTotalDeAgendamentos()}");
+                    Console.ForegroundColor = ConsoleColor.White;                    
+                }
+
+                else if (opcao == 19)
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine($"\n O valor total arrecadado nos agendamentos é: {TotalArrecadado():C2}");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("\n\n Informe a operação desejada:");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -392,8 +410,10 @@ namespace AgendamentoServico.Client
                 Console.WriteLine(" 14 - Remover um cliente cadastrado.");
                 Console.WriteLine(" 15 - Remover um serviço cadastrado.");
                 Console.WriteLine(" 16 - Remover um agendamento cadastrado.");
-                Console.WriteLine("\n 17 - Listar agendamentos detalhados para hoje..");
-                Console.WriteLine(" 0 - Sair\n");
+                Console.WriteLine("\n 17 - Listar agendamentos detalhados para hoje.");
+                Console.WriteLine(" 18 - Mostrar numero total de agendamentos.");
+                Console.WriteLine(" 19 - Mostrar arrecadamento total dos agendamentos.");
+                Console.WriteLine("\n 0 - Sair \n");
                 opcao = Convert.ToInt32(Console.ReadLine());
             }
         }
@@ -550,6 +570,66 @@ namespace AgendamentoServico.Client
             {
                 Console.WriteLine(ex.Message);
                 return new List<AgendamentoDetalhadoDto>();
+            }
+        }
+
+        public static int NumeroTotalDeAgendamentos()
+        {
+            HttpClient httpClient = new HttpClient();
+            HttpResponseMessage response;
+
+            //Busca todos os agendamentos dentro da api;
+            try
+            {
+                //monta a request para a api;
+                response = httpClient.GetAsync("https://localhost:44311/agendamento/numerototaldeagendamentos").Result;
+                response.EnsureSuccessStatusCode();
+
+                var resultado = response.Content.ReadAsStringAsync().Result;
+
+                if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    Console.WriteLine($"{resultado}");
+                    return 0;
+                }
+                //converte os dados recebidos e retorna eles como objetos do C#;
+
+                return Convert.ToInt32(resultado);
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
+        }
+
+        public static double TotalArrecadado()
+        {
+            HttpClient httpClient = new HttpClient();
+            HttpResponseMessage response;
+
+            //Busca todos os agendamentos dentro da api;
+            try
+            {
+                //monta a request para a api;
+                response = httpClient.GetAsync("https://localhost:44311/agendamento/totalarrecadado").Result;
+                response.EnsureSuccessStatusCode();
+
+                var resultado = response.Content.ReadAsStringAsync().Result;
+
+                if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    Console.WriteLine($"{resultado}");
+                    return 0;
+                }
+                //converte os dados recebidos e retorna eles como objetos do C#;
+
+                return Convert.ToDouble(resultado);
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
             }
         }
 

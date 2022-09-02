@@ -81,5 +81,27 @@ namespace AgendamentoServico.Controllers
             return Ok(resultado);
         }
 
+        [HttpGet]
+        public IActionResult NumeroTotalDeAgendamentos()
+        {
+            var resultado = _agendamentoRepository.NumeroTotalDeAgendamentos();
+
+            if (resultado == 0)
+                return NotFound();
+
+            return Ok(resultado);
+        }
+
+        [HttpGet]
+        public IActionResult TotalArrecadado()
+        {
+            var resultado = _agendamentoRepository.TotalArrecadado();
+
+            if (resultado == 0)
+                return NotFound();
+
+            return Ok(resultado);
+        }
+
     }
 }

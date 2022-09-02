@@ -119,7 +119,7 @@ namespace AgendamentoServico.Repositories
             List<AgendamentoDetalhadoDto> agendamentosEncontrados;
             try
             {                
-                var query = @"SELECT a.Id, a.DataContrato, a.PrazoEntrega, a.IdProfissional, p.Nome, a.IdCliente, c.Nome, a.IdServico, s.Tipo, s.Descricao, s.Valor FROM Agendamento a
+                var query = @"SELECT a.Id, a.DataContrato, a.PrazoEntrega, a.IdProfissional, p.Nome as NomeProfissional, a.IdCliente, c.Nome as NomeCliente, a.IdServico, s.Tipo, s.Descricao, s.Valor FROM Agendamento a
                               INNER JOIN Profissional p ON p.Id = a.IdProfissional
                               INNER JOIN Cliente c ON c.Id = a.IdCliente
                               INNER JOIN Servico s ON s.Id = a.IdServico
@@ -138,5 +138,49 @@ namespace AgendamentoServico.Repositories
                 return null;                
             }
         }
+
+        public int NumeroTotalDeAgendamentos()
+        {
+            try
+            {
+                var query = @"SELECT COUNT(Id) FROM Agendamento";
+
+                using (var connection = new SqlConnection(_connection))
+                {
+                     return connection.QueryFirstOrDefault<int>(query);
+                }
+
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro: " + ex.Message);
+                return 0;
+            }           
+
+        }
+
+        public double TotalArrecadado()
+        {
+            try
+            {
+                var query = @"SELECT SUM(s.Valor) FROM Agendamento a
+                              INNER JOIN Servico s ON s.Id = a.IdServico";
+
+                using (var connection = new SqlConnection(_connection))
+                {
+                    return connection.QueryFirstOrDefault<double>(query);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro: " + ex.Message);
+                return 0;
+            }
+
+        }
+
     }
 }
