@@ -26,6 +26,14 @@ namespace AgendamentoServico
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "Mypolicy",
+                                  policy =>
+                                  {
+                                      policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                                  });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +45,8 @@ namespace AgendamentoServico
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("Mypolicy");
 
             app.UseRouting();
 
